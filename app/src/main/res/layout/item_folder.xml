@@ -19,6 +19,7 @@
         android:layout_margin="8dp">
 
         <TextView
+            android:id="@+id/txt_folder_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="4dp"
@@ -26,6 +27,7 @@
             android:textSize="16sp"/>
 
         <TextView
+            android:id="@+id/txt_file_count"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="4dp"
