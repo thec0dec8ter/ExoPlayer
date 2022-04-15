@@ -1,15 +1,19 @@
 package dev.thec0dec8ter.exoplayer.adapter
 
+import android.graphics.drawable.BitmapDrawable
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import dev.thec0dec8ter.exoplayer.databinding.ItemVideoBinding
+import dev.thec0dec8ter.exoplayer.model.Video
 
 class VideoAdapter() : RecyclerView.Adapter<VideoAdapter.VideoViewHolder>() {
 
     private lateinit var binding : ItemVideoBinding
-    val videos :ArrayList<String> = ArrayList()
+    var videos :ArrayList<Video> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
         binding = ItemVideoBinding.inflate( LayoutInflater.from(parent.context), parent, false)
@@ -17,7 +21,7 @@ class VideoAdapter() : RecyclerView.Adapter<VideoAdapter.VideoViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
-        holder.bind(videos?.get(position))
+        holder.bind(videos.get(position))
     }
 
     override fun getItemCount(): Int {
@@ -25,8 +29,16 @@ class VideoAdapter() : RecyclerView.Adapter<VideoAdapter.VideoViewHolder>() {
     }
 
     class VideoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val context = itemView.context
+        val binding :ItemVideoBinding = ItemVideoBinding.bind(itemView)
 
-        fun bind(video: String?){
+        fun bind(video: Video){
+            Glide.with(context)
+                .load(video.uri)
+                .into(binding.imgThumbnail);
+
+            binding.txtVideoName.text = video.name
+
 
         }
 

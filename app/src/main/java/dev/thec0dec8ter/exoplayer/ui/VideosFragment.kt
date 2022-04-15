@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import dev.thec0dec8ter.exoplayer.R
 import dev.thec0dec8ter.exoplayer.adapter.FolderAdapter
 import dev.thec0dec8ter.exoplayer.adapter.VideoAdapter
 import dev.thec0dec8ter.exoplayer.databinding.FragmentVideosBinding
+import dev.thec0dec8ter.exoplayer.model.Video
 
 class VideosFragment : Fragment() {
 
@@ -20,9 +22,7 @@ class VideosFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         videoAdapter = VideoAdapter()
-
-        for
-        videoAdapter.videos.addAll(arguments!!.getStringArrayList("videos"))
+        videoAdapter.videos = arguments?.getSerializable("videos") as ArrayList<Video>
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,6 +32,8 @@ class VideosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         binding.videoRecycler.adapter = videoAdapter
     }

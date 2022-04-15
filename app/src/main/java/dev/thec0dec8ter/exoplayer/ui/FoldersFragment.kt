@@ -1,16 +1,19 @@
 package dev.thec0dec8ter.exoplayer.ui
 
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.loader.content.CursorLoader
 import dev.thec0dec8ter.exoplayer.adapter.FolderAdapter
 import dev.thec0dec8ter.exoplayer.databinding.FragmentFoldersBinding
 import dev.thec0dec8ter.exoplayer.model.Folder
+import dev.thec0dec8ter.exoplayer.model.Video
 import java.lang.StringBuilder
 
 class FoldersFragment : Fragment() {
@@ -22,7 +25,7 @@ class FoldersFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        folderAdapter = FolderAdapter(activity)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,6 +36,10 @@ class FoldersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+
+
+        folderAdapter = FolderAdapter(activity)
         binding.folderRecycler.adapter = folderAdapter
         getMediaFiles()
     }
@@ -42,9 +49,11 @@ class FoldersFragment : Fragment() {
 
         val projection = arrayOf(
             MediaStore.Video.Media._ID,
-            MediaStore.Video.Media.BUCKET_ID,
             MediaStore.Video.Media.BUCKET_DISPLAY_NAME,
-            MediaStore.Video.Media.DISPLAY_NAME
+            MediaStore.Video.Media.DISPLAY_NAME,
+            MediaStore.Video.Media.DURATION,
+            MediaStore.Video.Media.DATE_MODIFIED,
+
         )
 
         val cursorLoader = CursorLoader(
@@ -60,14 +69,19 @@ class FoldersFragment : Fragment() {
         if (cursor != null && cursor.moveToFirst()) {
             val idColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media._ID)
             val bucketNameColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.BUCKET_DISPLAY_NAME)
+            val nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DISPLAY_NAME)
 
             while (cursor.moveToNext()) {
                 val bucketName = cursor.getString(bucketNameColumn)
+                val name = cursor.getString(nameColumn)
+                val uri = Uri.withAppendedPath(externalStorageUri, cursor.getLong(idColumn).toString())
+                val video = Video(name, uri)
+
                 if(folderAdapter.containsFolder(bucketName)){
-                    folderAdapter.getFolder(bucketName).fileIdList.add(cursor.getLong(idColumn).toString())
+                    folderAdapter.getFolder(bucketName).folderVideos.add(video)
                 }else{
                     val folder = Folder(bucketName)
-                    folder.fileIdList.add(cursor.getLong(idColumn).toString())
+                    folder.folderVideos.add(video)
                     folderAdapter.addFolder(folder)
                 }
             }

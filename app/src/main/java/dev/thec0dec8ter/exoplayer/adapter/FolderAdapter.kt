@@ -51,11 +51,11 @@ class FolderAdapter(val activity: FragmentActivity?) : RecyclerView.Adapter<Fold
 
         fun bind(folder: Folder){
             binding.txtFolderName.text = folder.name
-            binding.txtFileCount.text = folder.fileIdList.size.toString() + " videos"
+            binding.txtFileCount.text = folder.folderVideos.size.toString() + " videos"
 
             itemView.setOnClickListener(){
                 val args = Bundle()
-                args.putStringArrayList("videos", folder.fileIdList)
+                args.putSerializable("videos", folder.folderVideos)
                 activity.findNavController(R.id.nav_host_fragment).navigate(R.id.action_folder_to_video, args)
             }
         }
