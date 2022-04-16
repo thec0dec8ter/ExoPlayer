@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.loader.content.CursorLoader
+import dev.thec0dec8ter.exoplayer.R
 import dev.thec0dec8ter.exoplayer.adapter.FolderAdapter
 import dev.thec0dec8ter.exoplayer.databinding.FragmentFoldersBinding
 import dev.thec0dec8ter.exoplayer.model.Folder
@@ -30,13 +31,15 @@ class FoldersFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentFoldersBinding.inflate(layoutInflater, container, false)
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu);
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
 
         folderAdapter = FolderAdapter(activity)

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimaryVariant"
     android:orientation="vertical"
     tools:context=".ui.FoldersFragment">
 
@@ -11,16 +12,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Folders"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-
-    </androidx.appcompat.widget.Toolbar>
+        android:background="?attr/colorPrimary"
+        app:title="Folders"
+        app:titleTextColor="@color/white"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/folder_recycler"
