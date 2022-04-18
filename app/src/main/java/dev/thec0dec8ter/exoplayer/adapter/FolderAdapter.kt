@@ -55,6 +55,7 @@ class FolderAdapter(val activity: FragmentActivity?) : RecyclerView.Adapter<Fold
 
             itemView.setOnClickListener(){
                 val args = Bundle()
+                args.putString("folder_name", folder.name)
                 args.putSerializable("videos", folder.folderVideos)
                 activity.findNavController(R.id.nav_host_fragment).navigate(R.id.action_folder_to_video, args)
             }

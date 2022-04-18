@@ -3,10 +3,7 @@ package dev.thec0dec8ter.exoplayer.ui
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.loader.content.CursorLoader
@@ -15,7 +12,7 @@ import dev.thec0dec8ter.exoplayer.adapter.FolderAdapter
 import dev.thec0dec8ter.exoplayer.databinding.FragmentFoldersBinding
 import dev.thec0dec8ter.exoplayer.model.Folder
 import dev.thec0dec8ter.exoplayer.model.Video
-import java.lang.StringBuilder
+
 
 class FoldersFragment : Fragment() {
 
@@ -88,6 +85,20 @@ class FoldersFragment : Fragment() {
                     folderAdapter.addFolder(folder)
                 }
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                activity?.onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

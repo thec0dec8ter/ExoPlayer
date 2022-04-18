@@ -1,8 +1,6 @@
 package dev.thec0dec8ter.exoplayer.adapter
 
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
-import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,5 +45,7 @@ class VideoAdapter() : RecyclerView.Adapter<VideoAdapter.VideoViewHolder>() {
                 context.startActivity(intent)
             }
         }
+
+
     }
 }

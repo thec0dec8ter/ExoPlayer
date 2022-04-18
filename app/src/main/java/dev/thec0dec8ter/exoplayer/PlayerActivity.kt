@@ -1,15 +1,12 @@
 package dev.thec0dec8ter.exoplayer
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.material.snackbar.Snackbar
 import dev.thec0dec8ter.exoplayer.databinding.ActivityPlayerBinding
 import dev.thec0dec8ter.exoplayer.model.Video
 
@@ -31,7 +28,7 @@ class PlayerActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if(intent != null){
-            video = intent.getExtras()?.getParcelable<Video>("video")!!
+            video = intent.extras?.getParcelable<Video>("video")!!
         }else{
             finish()
         }
@@ -39,8 +36,25 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.toolbar.title = video.name
         initializePlayer(MediaItem.fromUri(video.uri))
-//        hideSystemUi()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     public override fun onStop() {
@@ -58,6 +72,8 @@ class PlayerActivity : AppCompatActivity() {
         exoPlayer?.playWhenReady = playWhenReady
         exoPlayer?.seekTo(currentWindow, playbackPosition)
         exoPlayer?.prepare()
+
+
     }
 
 

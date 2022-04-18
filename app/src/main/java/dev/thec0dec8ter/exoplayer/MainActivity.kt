@@ -10,7 +10,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
-import dev.thec0dec8ter.exoplayer.adapter.VideoAdapter
 
 class MainActivity : AppCompatActivity() {
 

@@ -3,8 +3,6 @@ package dev.thec0dec8ter.exoplayer.model
 import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
-import java.io.Serializable
-import java.time.Duration
 
 class Video(var name: String, var uri :Uri) : Parcelable{
 

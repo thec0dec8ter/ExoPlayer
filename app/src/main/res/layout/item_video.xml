@@ -3,16 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="4dp"
     android:orientation="horizontal"
     android:gravity="center">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_thumbnail"
         android:layout_width="100dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_height="72dp"
+        android:layout_margin="4dp"
         android:background="@color/white"
         android:scaleType="centerCrop"
         app:shapeAppearance="@style/curvedCornerAppearance" />
@@ -21,8 +20,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_margin="8dp"
         android:orientation="vertical">
 
         <TextView
@@ -32,7 +30,7 @@
             android:layout_margin="4dp"
             android:text="loeree"
             android:textSize="14sp"
-            android:maxLines="3"
+            android:maxLines="1"
             android:ellipsize="end"/>
 
         <TextView
@@ -51,8 +49,7 @@
         android:src="@drawable/ic_more_vert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_margin="4dp"
         android:padding="8dp"/>
 
 </LinearLayout>
