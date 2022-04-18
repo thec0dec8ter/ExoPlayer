@@ -1,5 +1,6 @@
 package dev.thec0dec8ter.exoplayer.adapter
 
+import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.util.Size
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import dev.thec0dec8ter.exoplayer.PlayerActivity
 import dev.thec0dec8ter.exoplayer.databinding.ItemVideoBinding
 import dev.thec0dec8ter.exoplayer.model.Video
 
@@ -39,8 +41,11 @@ class VideoAdapter() : RecyclerView.Adapter<VideoAdapter.VideoViewHolder>() {
 
             binding.txtVideoName.text = video.name
 
-
+            itemView.setOnClickListener(){
+                val intent = Intent(context, PlayerActivity::class.java)
+                intent.putExtra("video", video)
+                context.startActivity(intent)
+            }
         }
-
     }
 }
